@@ -122,10 +122,10 @@ The final score is generated using weighted scoring logic.
 
 Based on ATS score, the system automatically generates recruiter recommendations such as:
 
-- Excellent Match ⭐
-- Good Match ✅
-- Average Match ⚠️
-- Not Suitable ❌
+- Excellent Match 
+- Good Match 
+- Average Match 
+- Not Suitable 
 
 ---
 
@@ -210,7 +210,7 @@ Visualization & Reports
 
 # 📁 Project Structure
 
-```text
+```
 semester_project/
 │
 ├── data/
@@ -245,6 +245,8 @@ semester_project/
 ├── requirements.txt
 ├── README.md
 └── .gitignore
+```
+---
 
 # ⚙️ Technologies Used
 
