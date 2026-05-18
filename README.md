@@ -44,19 +44,19 @@ Unlike manual recruitment screening, this system provides:
 
 The main objectives of this project are:
 
-✅ Automate resume screening  
-✅ Reduce manual recruitment effort  
-✅ Improve hiring efficiency  
-✅ Provide ATS-based candidate ranking  
-✅ Identify matched & missing skills  
-✅ Generate recruiter-friendly reports  
-✅ Support multiple resume analysis  
+- Automate resume screening
+- Reduce manual recruitment effort
+- Improve hiring efficiency
+- Provide ATS-based candidate ranking
+- Identify matched & missing skills
+-  Generate recruiter-friendly reports
+- Support multiple resume analysis  
 
 ---
 
 # 💡 Core Features
 
-## ✅ Resume Parsing
+## Resume Parsing
 
 Supports:
 - PDF resumes
@@ -67,7 +67,7 @@ The system automatically extracts textual content from uploaded resumes.
 
 ---
 
-## ✅ NLP Text Processing
+## NLP Text Processing
 
 The project performs:
 - Lowercase conversion
@@ -80,7 +80,7 @@ using NLTK-based preprocessing.
 
 ---
 
-## ✅ Skill Extraction Engine
+## Skill Extraction Engine
 
 The system identifies technical skills such as:
 
@@ -98,7 +98,7 @@ and many others using custom keyword matching.
 
 ---
 
-## ✅ ATS Match Scoring
+## ATS Match Scoring
 
 The ATS engine combines:
 
@@ -118,18 +118,18 @@ The final score is generated using weighted scoring logic.
 
 ---
 
-## ✅ AI Recommendation System
+## AI Recommendation System
 
 Based on ATS score, the system automatically generates recruiter recommendations such as:
 
-- Excellent Match ⭐
-- Good Match ✅
-- Average Match ⚠️
-- Not Suitable ❌
+- Excellent Match 
+- Good Match 
+- Average Match 
+- Not Suitable 
 
 ---
 
-## ✅ Multi Resume Ranking
+## Multi Resume Ranking
 
 The system supports:
 - multiple resume uploads
@@ -140,7 +140,7 @@ Candidates are sorted automatically from highest to lowest ATS score.
 
 ---
 
-## ✅ Dashboard Analytics
+## Dashboard Analytics
 
 The system includes:
 - ATS metrics
@@ -151,7 +151,7 @@ The system includes:
 
 ---
 
-## ✅ CSV Report Export
+## CSV Report Export
 
 Recruiters can:
 - download ATS reports
@@ -210,7 +210,7 @@ Visualization & Reports
 
 # 📁 Project Structure
 
-```text
+```
 semester_project/
 │
 ├── data/
@@ -245,6 +245,8 @@ semester_project/
 ├── requirements.txt
 ├── README.md
 └── .gitignore
+```
+---
 
 # ⚙️ Technologies Used
 
@@ -410,14 +412,14 @@ Recruiters can:
 
 The dashboard includes:
 
-✅ ATS Score  
-✅ Similarity Score  
-✅ Skill Match Score  
-✅ AI Recommendation  
-✅ Resume Ranking Table  
-✅ Best Candidate Detection  
-✅ Charts & Analytics  
-✅ CSV Report Export  
+- ATS Score
+- Similarity Score
+- Skill Match Score
+- AI Recommendation
+- Resume Ranking Table
+- Best Candidate Detection
+- Charts & Analytics
+- CSV Report Export  
 
 ---
 
@@ -512,7 +514,7 @@ Future enhancements may include:
 
 ---
 
-# ✅ Project Compliance
+# Project Compliance
 
 This project satisfies:
 - SRS requirements
