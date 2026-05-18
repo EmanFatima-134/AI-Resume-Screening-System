@@ -3,6 +3,8 @@
 # ==========================================
 
 import streamlit as st
+import plotly.express as px
+import pandas as pd
 
 from utils.pdf_extractor import extract_resume_text
 
@@ -42,36 +44,77 @@ st.set_page_config(
 
 
 # ==========================================
-# TITLE
+# SIDEBAR
+# ==========================================
+
+st.sidebar.title("📄 AI Resume ATS")
+
+st.sidebar.markdown("---")
+
+st.sidebar.info(
+
+    """
+    ### Features
+    
+    ✅ Resume Parsing  
+    ✅ NLP Processing  
+    ✅ Skill Extraction  
+    ✅ ATS Match Score  
+    ✅ Multi Resume Ranking  
+    ✅ AI Recommendation  
+    """
+)
+
+st.sidebar.markdown("---")
+
+st.sidebar.success(
+
+    "Developed Using Python + NLP + Streamlit"
+
+)
+
+
+# ==========================================
+# MAIN TITLE
 # ==========================================
 
 st.title("📄 AI Resume Screening & Job Matching System")
+
+st.markdown(
+
+    "### Intelligent ATS-Based Resume Analyzer"
+
+)
 
 st.markdown("---")
 
 
 # ==========================================
-# JOB DESCRIPTION INPUT
+# JOB DESCRIPTION
 # ==========================================
 
 job_description = st.text_area(
 
     "💼 Enter Job Description",
 
-    height=200
+    height=220,
+
+    placeholder="Paste job description here..."
 
 )
 
 
 # ==========================================
-# FILE UPLOADER
+# MULTIPLE FILE UPLOADER
 # ==========================================
 
-uploaded_file = st.file_uploader(
+uploaded_files = st.file_uploader(
 
-    "📄 Upload Resume",
+    "📄 Upload Resume(s)",
 
-    type=["pdf", "docx", "txt"]
+    type=["pdf", "docx", "txt"],
+
+    accept_multiple_files=True
 
 )
 
@@ -80,47 +123,27 @@ uploaded_file = st.file_uploader(
 # MAIN ANALYSIS
 # ==========================================
 
-if uploaded_file is not None and job_description != "":
+if uploaded_files and job_description != "":
 
-    st.success("Resume Uploaded Successfully ✅")
+    st.success(
 
-    if st.button("🚀 Analyze Resume"):
+        f"{len(uploaded_files)} Resume(s) Uploaded Successfully ✅"
 
-        with st.spinner("Analyzing Resume..."):
+    )
 
-            # ==========================================
-            # EXTRACT RESUME TEXT
-            # ==========================================
+    if st.button("🚀 Analyze Resumes"):
 
-            extracted_text = extract_resume_text(
+        all_results = []
 
-                uploaded_file
-
-            )
+        with st.spinner("Analyzing Resumes..."):
 
             # ==========================================
-            # NLP PROCESSING
+            # PROCESS JOB DESCRIPTION
             # ==========================================
-
-            processed_resume = preprocess_text(
-
-                extracted_text
-
-            )
 
             processed_job = preprocess_text(
 
                 job_description
-
-            )
-
-            # ==========================================
-            # SKILL EXTRACTION
-            # ==========================================
-
-            resume_skills = extract_skills(
-
-                processed_resume
 
             )
 
@@ -131,185 +154,312 @@ if uploaded_file is not None and job_description != "":
             )
 
             # ==========================================
-            # SKILL ANALYSIS
+            # PROCESS EACH RESUME
             # ==========================================
 
-            analysis = get_skill_analysis(
+            for uploaded_file in uploaded_files:
 
-                resume_skills,
+                # ==========================================
+                # EXTRACT TEXT
+                # ==========================================
 
-                job_skills
+                extracted_text = extract_resume_text(
 
-            )
+                    uploaded_file
 
-            # ==========================================
-            # COSINE SIMILARITY
-            # ==========================================
+                )
 
-            similarity_score = calculate_similarity(
+                # ==========================================
+                # NLP PROCESSING
+                # ==========================================
 
-                processed_resume,
+                processed_resume = preprocess_text(
 
-                processed_job
+                    extracted_text
 
-            )
+                )
 
-            # ==========================================
-            # SKILL MATCH SCORE
-            # ==========================================
+                # ==========================================
+                # SKILL EXTRACTION
+                # ==========================================
 
-            skill_match_score = calculate_skill_match_score(
+                resume_skills = extract_skills(
 
-                analysis["matched_skills"],
+                    processed_resume
 
-                job_skills
+                )
 
-            )
+                # ==========================================
+                # SKILL ANALYSIS
+                # ==========================================
 
-            # ==========================================
-            # FINAL ATS SCORE
-            # ==========================================
+                analysis = get_skill_analysis(
 
-            final_score = calculate_final_score(
+                    resume_skills,
 
-                similarity_score,
+                    job_skills
 
-                skill_match_score
+                )
 
-            )
+                # ==========================================
+                # SIMILARITY
+                # ==========================================
 
-            # ==========================================
-            # RECOMMENDATION
-            # ==========================================
+                similarity_score = calculate_similarity(
 
-            recommendation = generate_recommendation(
+                    processed_resume,
 
-                final_score
+                    processed_job
 
-            )
+                )
+
+                # ==========================================
+                # SKILL MATCH SCORE
+                # ==========================================
+
+                skill_match_score = calculate_skill_match_score(
+
+                    analysis["matched_skills"],
+
+                    job_skills
+
+                )
+
+                # ==========================================
+                # FINAL ATS SCORE
+                # ==========================================
+
+                final_score = calculate_final_score(
+
+                    similarity_score,
+
+                    skill_match_score
+
+                )
+
+                # ==========================================
+                # RECOMMENDATION
+                # ==========================================
+
+                recommendation = generate_recommendation(
+
+                    final_score
+
+                )
+
+                # ==========================================
+                # SAVE RESULTS
+                # ==========================================
+
+                all_results.append({
+
+                    "Candidate":
+
+                    uploaded_file.name,
+
+                    "ATS Score":
+
+                    final_score,
+
+                    "Similarity":
+
+                    similarity_score,
+
+                    "Skill Match":
+
+                    skill_match_score,
+
+                    "Matched Skills":
+
+                    len(
+
+                        analysis["matched_skills"]
+
+                    ),
+
+                    "Missing Skills":
+
+                    len(
+
+                        analysis["missing_skills"]
+
+                    ),
+
+                    "Recommendation":
+
+                    recommendation
+
+                })
 
         # ==========================================
-        # SCORE SECTION
+        # RESULTS DATAFRAME
         # ==========================================
 
-        st.subheader("📊 Match Score")
+        results_df = pd.DataFrame(
 
-        st.progress(int(final_score))
-
-        st.metric(
-
-            label="Final ATS Match Score",
-
-            value=f"{final_score}%"
+            all_results
 
         )
 
-        st.write(
+        # ==========================================
+        # SORT BY ATS SCORE
+        # ==========================================
 
-            f"📌 Cosine Similarity Score: {similarity_score}%"
+        results_df = results_df.sort_values(
+
+            by="ATS Score",
+
+            ascending=False
 
         )
 
-        st.write(
+        # ==========================================
+        # TOP CANDIDATE
+        # ==========================================
 
-            f"🧠 Skill Match Score: {skill_match_score}%"
+        top_candidate = results_df.iloc[0]
+
+        st.success(
+
+            f"🏆 Best Candidate: {top_candidate['Candidate']}"
 
         )
 
         # ==========================================
-        # RECOMMENDATION
+        # DASHBOARD METRICS
         # ==========================================
 
-        st.subheader("🎯 Recommendation")
-
-        st.info(recommendation)
-
-        # ==========================================
-        # SKILL DISPLAY
-        # ==========================================
-
-        col1, col2 = st.columns(2)
+        col1, col2, col3 = st.columns(3)
 
         with col1:
 
-            st.subheader("🧠 Resume Skills")
+            st.metric(
 
-            st.success(
+                "📄 Total Resumes",
 
-                resume_skills
+                len(results_df)
 
             )
 
         with col2:
 
-            st.subheader("💼 Job Skills")
+            st.metric(
 
-            st.warning(
+                "🏆 Highest ATS Score",
 
-                job_skills
+                f"{top_candidate['ATS Score']}%"
 
             )
 
+        with col3:
+
+            st.metric(
+
+                "🎯 Best Match",
+
+                top_candidate["Candidate"]
+
+            )
+
+        st.markdown("---")
+
         # ==========================================
-        # MATCHED SKILLS
+        # RESULTS TABLE
         # ==========================================
 
-        st.subheader("✅ Matched Skills")
+        st.subheader("📊 Resume Ranking Table")
 
-        st.success(
+        st.dataframe(
 
-            analysis["matched_skills"]
+            results_df,
+
+            use_container_width=True
+
+        )
+        # ==========================================
+        # DOWNLOAD CSV REPORT
+        # ==========================================
+
+        # ==========================================
+        # SAVE CSV REPORT
+        # ==========================================
+
+        results_df.to_csv(
+
+            "results/ATS_Resume_Report.csv",
+
+            index=False
 
         )
 
         # ==========================================
-        # MISSING SKILLS
+        # DOWNLOAD CSV REPORT
         # ==========================================
 
-        st.subheader("❌ Missing Skills")
+        csv_data = results_df.to_csv(
 
-        st.error(
+            index=False
 
-            analysis["missing_skills"]
+        ).encode("utf-8")
+
+        st.download_button(
+
+            label="⬇ Download ATS Report CSV",
+
+            data=csv_data,
+
+            file_name="ATS_Resume_Report.csv",
+
+            mime="text/csv"
+
+        )
+        
+        # ==========================================
+        # BAR CHART
+        # ==========================================
+
+        fig = px.bar(
+
+            results_df,
+
+            x="Candidate",
+
+            y="ATS Score",
+
+            color="ATS Score",
+
+            title="ATS Resume Ranking"
+
+        )
+
+        st.plotly_chart(
+
+            fig,
+
+            use_container_width=True
 
         )
 
         # ==========================================
-        # RAW RESUME TEXT
+        # PIE CHART
         # ==========================================
 
-        with st.expander(
+        pie_fig = px.pie(
 
-            "📄 View Extracted Resume Text"
+            results_df,
 
-        ):
+            names="Candidate",
 
-            st.text_area(
+            values="ATS Score",
 
-                "Resume Content",
+            title="Candidate Score Distribution"
 
-                extracted_text,
+        )
 
-                height=300
+        st.plotly_chart(
 
-            )
+            pie_fig,
 
-        # ==========================================
-        # NLP PROCESSED TEXT
-        # ==========================================
+            use_container_width=True
 
-        with st.expander(
-
-            "🧠 View NLP Processed Text"
-
-        ):
-
-            st.text_area(
-
-                "Processed Resume",
-
-                processed_resume,
-
-                height=300
-
-            )
+        )

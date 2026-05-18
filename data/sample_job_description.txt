@@ -1,0 +1,14 @@
+We are looking for a Unity Game Developer with strong experience in Unity Engine, C#, Git, Blender, and Python. The candidate should have knowledge of multiplayer game development, UI systems, gameplay programming, and debugging. Experience with GitHub, AI systems, and optimization techniques is a plus.
+
+Required Skills:
+- Unity
+- C#
+- Python
+- Git
+- Blender
+
+Preferred Skills:
+- Multiplayer Networking
+- Unreal Engine
+- Streamlit
+- AI Systems

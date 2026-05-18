@@ -1,0 +1,4 @@
+Candidate,ATS Score,Similarity,Skill Match,Matched Skills,Missing Skills,Recommendation
+Resume 1.docx,82.74,42.45,100.0,5,0,Excellent Match ⭐
+Resume 3.docx,65.08,30.26,80.0,4,1,Good Match ✅
+Resume 2.docx,63.69,25.63,80.0,4,1,Average Match ⚠️
