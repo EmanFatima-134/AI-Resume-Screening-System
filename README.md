@@ -1,4 +1,4 @@
-#📖 AI Resume Screening & Job Matching System
+# 📖 AI Resume Screening & Job Matching System
 
 [![AI Project](https://img.shields.io/badge/AI-Resume%20Screening-blue)](https://github.com/EmanFatima-134/AI-Resume-Screening-System)
 [![Tech Stack](https://img.shields.io/badge/Stack-Python%20%7C%20Streamlit%20%7C%20NLP-brightgreen)](https://www.python.org/)
