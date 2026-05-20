@@ -1,4 +1,4 @@
 Candidate,ATS Score,Similarity,Skill Match,Matched Skills,Missing Skills,Recommendation
-Resume 1.docx,82.74,42.45,100.0,5,0,Excellent Match ⭐
-Resume 3.docx,65.08,30.26,80.0,4,1,Good Match ✅
-Resume 2.docx,63.69,25.63,80.0,4,1,Average Match ⚠️
+Resume 1.docx,74.53,44.27,87.5,"blender, c, git, github, python, streamlit, unity",unreal engine,Good Match ✅
+Resume 2.docx,62.86,34.55,75.0,"blender, c, git, github, python, unreal engine","streamlit, unity",Average Match ⚠️
+Resume 3.docx,43.12,27.08,50.0,"blender, c, python, unity","git, github, streamlit, unreal engine",Not Suitable ❌

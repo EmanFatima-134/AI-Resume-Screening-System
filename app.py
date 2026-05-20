@@ -1,5 +1,5 @@
 # ==========================================
-# AI RESUME SCREENING SYSTEM
+# AI RESUME SCREENING & JOB MATCHING SYSTEM
 # ==========================================
 
 import streamlit as st
@@ -7,7 +7,6 @@ import plotly.express as px
 import pandas as pd
 
 from utils.pdf_extractor import extract_resume_text
-
 from utils.text_preprocessing import preprocess_text
 
 from utils.skill_extractor import (
@@ -16,13 +15,9 @@ from utils.skill_extractor import (
 )
 
 from utils.similarity_calculator import (
-
     calculate_similarity,
-
     calculate_skill_match_score,
-
     calculate_final_score
-
 )
 
 from utils.recommendation import generate_recommendation
@@ -44,6 +39,48 @@ st.set_page_config(
 
 
 # ==========================================
+# CUSTOM CSS
+# ==========================================
+
+st.markdown("""
+
+<style>
+
+.main {
+    background-color: #0E1117;
+}
+
+.stButton>button {
+
+    width: 100%;
+    border-radius: 10px;
+    height: 3em;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.metric-card {
+
+    background-color: #1E1E1E;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.skill-box {
+
+    background-color: #1E1E1E;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+</style>
+
+""", unsafe_allow_html=True)
+
+
+# ==========================================
 # SIDEBAR
 # ==========================================
 
@@ -55,13 +92,19 @@ st.sidebar.info(
 
     """
     ### Features
-    
-    ✅ Resume Parsing  
-    ✅ NLP Processing  
-    ✅ Skill Extraction  
-    ✅ ATS Match Score  
-    ✅ Multi Resume Ranking  
-    ✅ AI Recommendation  
+
+    ✅ Resume Parsing
+
+    ✅ NLP Processing
+
+    ✅ Skill Extraction
+
+    ✅ ATS Match Score
+
+    ✅ Multi Resume Ranking
+
+    ✅ AI Recommendation
+
     """
 )
 
@@ -90,7 +133,7 @@ st.markdown("---")
 
 
 # ==========================================
-# JOB DESCRIPTION
+# JOB DESCRIPTION INPUT
 # ==========================================
 
 job_description = st.text_area(
@@ -99,13 +142,13 @@ job_description = st.text_area(
 
     height=220,
 
-    placeholder="Paste job description here..."
+    placeholder="Paste complete job description here..."
 
 )
 
 
 # ==========================================
-# MULTIPLE FILE UPLOADER
+# FILE UPLOADER
 # ==========================================
 
 uploaded_files = st.file_uploader(
@@ -201,8 +244,12 @@ if uploaded_files and job_description != "":
 
                 )
 
+                matched_skills = analysis["matched_skills"]
+
+                missing_skills = analysis["missing_skills"]
+
                 # ==========================================
-                # SIMILARITY
+                # SIMILARITY SCORE
                 # ==========================================
 
                 similarity_score = calculate_similarity(
@@ -219,7 +266,7 @@ if uploaded_files and job_description != "":
 
                 skill_match_score = calculate_skill_match_score(
 
-                    analysis["matched_skills"],
+                    matched_skills,
 
                     job_skills
 
@@ -259,31 +306,27 @@ if uploaded_files and job_description != "":
 
                     "ATS Score":
 
-                    final_score,
+                    round(final_score, 2),
 
                     "Similarity":
 
-                    similarity_score,
+                    round(similarity_score, 2),
 
                     "Skill Match":
 
-                    skill_match_score,
+                    round(skill_match_score, 2),
 
                     "Matched Skills":
 
-                    len(
+                    ", ".join(matched_skills)
 
-                        analysis["matched_skills"]
-
-                    ),
+                    if matched_skills else "None",
 
                     "Missing Skills":
 
-                    len(
+                    ", ".join(missing_skills)
 
-                        analysis["missing_skills"]
-
-                    ),
+                    if missing_skills else "None",
 
                     "Recommendation":
 
@@ -292,7 +335,7 @@ if uploaded_files and job_description != "":
                 })
 
         # ==========================================
-        # RESULTS DATAFRAME
+        # CREATE DATAFRAME
         # ==========================================
 
         results_df = pd.DataFrame(
@@ -302,7 +345,7 @@ if uploaded_files and job_description != "":
         )
 
         # ==========================================
-        # SORT BY ATS SCORE
+        # SORT RESULTS
         # ==========================================
 
         results_df = results_df.sort_values(
@@ -314,7 +357,7 @@ if uploaded_files and job_description != "":
         )
 
         # ==========================================
-        # TOP CANDIDATE
+        # BEST CANDIDATE
         # ==========================================
 
         top_candidate = results_df.iloc[0]
@@ -376,12 +419,9 @@ if uploaded_files and job_description != "":
             use_container_width=True
 
         )
-        # ==========================================
-        # DOWNLOAD CSV REPORT
-        # ==========================================
 
         # ==========================================
-        # SAVE CSV REPORT
+        # DOWNLOAD CSV REPORT
         # ==========================================
 
         results_df.to_csv(
@@ -391,10 +431,6 @@ if uploaded_files and job_description != "":
             index=False
 
         )
-
-        # ==========================================
-        # DOWNLOAD CSV REPORT
-        # ==========================================
 
         csv_data = results_df.to_csv(
 
@@ -413,10 +449,14 @@ if uploaded_files and job_description != "":
             mime="text/csv"
 
         )
-        
+
+        st.markdown("---")
+
         # ==========================================
         # BAR CHART
         # ==========================================
+
+        st.subheader("📈 ATS Resume Ranking")
 
         fig = px.bar(
 
@@ -428,7 +468,17 @@ if uploaded_files and job_description != "":
 
             color="ATS Score",
 
+            text="ATS Score",
+
             title="ATS Resume Ranking"
+
+        )
+
+        fig.update_layout(
+
+            template="plotly_dark",
+
+            height=500
 
         )
 
@@ -444,6 +494,8 @@ if uploaded_files and job_description != "":
         # PIE CHART
         # ==========================================
 
+        st.subheader("🥧 Candidate Score Distribution")
+
         pie_fig = px.pie(
 
             results_df,
@@ -456,6 +508,14 @@ if uploaded_files and job_description != "":
 
         )
 
+        pie_fig.update_layout(
+
+            template="plotly_dark",
+
+            height=500
+
+        )
+
         st.plotly_chart(
 
             pie_fig,
@@ -463,3 +523,47 @@ if uploaded_files and job_description != "":
             use_container_width=True
 
         )
+
+        # ==========================================
+        # DETAILED CANDIDATE ANALYSIS
+        # ==========================================
+
+        st.markdown("---")
+
+        st.subheader("🧠 Detailed Candidate Analysis")
+
+        for index, row in results_df.iterrows():
+
+            with st.expander(
+
+                f"📄 {row['Candidate']} | ATS Score: {row['ATS Score']}%"
+
+            ):
+
+                col1, col2 = st.columns(2)
+
+                with col1:
+
+                    st.success("✅ Matched Skills")
+
+                    st.write(row["Matched Skills"])
+
+                with col2:
+
+                    st.error("❌ Missing Skills")
+
+                    st.write(row["Missing Skills"])
+
+                st.info(
+
+                    f"🎯 Recommendation: {row['Recommendation']}"
+
+                )
+
+else:
+
+    st.info(
+
+        "👈 Please upload resume(s) and enter job description to begin analysis."
+
+    )
