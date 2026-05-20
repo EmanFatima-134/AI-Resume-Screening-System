@@ -1,5 +1,13 @@
-# AI Resume Screening & Job Matching System📖
+#📖 AI Resume Screening & Job Matching System
 
+[![AI Project](https://img.shields.io/badge/AI-Resume%20Screening-blue)](https://github.com/EmanFatima-134/AI-Resume-Screening-System)
+[![Tech Stack](https://img.shields.io/badge/Stack-Python%20%7C%20Streamlit%20%7C%20NLP-brightgreen)](https://www.python.org/)
+[![Deployment](https://img.shields.io/badge/Deployment-Streamlit%20Cloud-red)](https://streamlit.io/cloud)
+[![Status](https://img.shields.io/badge/Status-Completed-success)](https://github.com/EmanFatima-134/AI-Resume-Screening-System)
+[![Course](https://img.shields.io/badge/Course-Software%20Engineering-purple)](https://github.com/)
+[![Libraries](https://img.shields.io/badge/Libraries-NLTK%20%7C%20Scikit--Learn-orange)](https://scikit-learn.org/)
+[![ATS System](https://img.shields.io/badge/System-AI%20ATS%20Ranking-darkgreen)](https://github.com/EmanFatima-134/AI-Resume-Screening-System)
+[![License](https://img.shields.io/badge/License-MIT-yellow)](https://opensource.org/licenses/MIT)
 ---
 
 ## **📌 Project Overview**
