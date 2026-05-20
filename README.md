@@ -1,10 +1,8 @@
-# AI Resume Screening & Job Matching System
-
-AI ATS Resume Screening NLP Streamlit Python Recruitment Software Engineering
+# AI Resume Screening & Job Matching System📖
 
 ---
 
-# 📖 Project Overview
+## **📌 Project Overview**
 
 The **AI Resume Screening & Job Matching System** is an AI-powered recruitment assistance platform developed for the **Software Engineering Semester Project**.
 
@@ -21,8 +19,6 @@ The project uses:
 - Cosine Similarity
 - Skill Matching Algorithms
 
-to intelligently compare resumes with job descriptions and generate recruiter-friendly analysis reports.
-
 Unlike manual recruitment screening, this system provides:
 - faster evaluation
 - skill gap analysis
@@ -31,16 +27,15 @@ Unlike manual recruitment screening, this system provides:
 
 ---
 
-# 👥 Team Information
+## **👥 Team Information**
 
-## Group Members
-
+**Group Members**
 - Eman Fatima (BSCS24134)
 - Naimal Munir (BSCS24101)
 
 ---
 
-# 🎯 Project Objectives
+## **💡 Project Objectives**
 
 The main objectives of this project are:
 
@@ -54,9 +49,9 @@ The main objectives of this project are:
 
 ---
 
-# 💡 Core Features
+## **✨ Core Features**
 
-## Resume Parsing
+### 1- Resume Parsing
 
 Supports:
 - PDF resumes
@@ -65,9 +60,7 @@ Supports:
 
 The system automatically extracts textual content from uploaded resumes.
 
----
-
-## NLP Text Processing
+### 2- NLP Text Processing
 
 The project performs:
 - Lowercase conversion
@@ -78,9 +71,7 @@ The project performs:
 
 using NLTK-based preprocessing.
 
----
-
-## Skill Extraction Engine
+### 3- Skill Extraction Engine
 
 The system identifies technical skills such as:
 
@@ -98,27 +89,28 @@ and many others using custom keyword matching.
 
 ---
 
-## ATS Match Scoring
+### 4- ATS Match Scoring
 
 The ATS engine combines:
 
-### 1. Cosine Similarity Score
+**1. Cosine Similarity Score**
+
 Using:
 - TF-IDF Vectorization
 - Cosine Similarity
 
-### 2. Skill Match Score
+**2. Skill Match Score**
+
 Using:
 - matched skills
 - missing skills
 - job requirement comparison
 
-### Final Hybrid ATS Score
+**Final Hybrid ATS Score**
+
 The final score is generated using weighted scoring logic.
 
----
-
-## AI Recommendation System
+### 5- AI Recommendation System
 
 Based on ATS score, the system automatically generates recruiter recommendations such as:
 
@@ -127,20 +119,16 @@ Based on ATS score, the system automatically generates recruiter recommendations
 - Average Match 
 - Not Suitable 
 
----
-
-## Multi Resume Ranking
+### 6- Multi Resume Ranking
 
 The system supports:
 - multiple resume uploads
 - automatic candidate comparison
 - ATS-based ranking
-
+- 
 Candidates are sorted automatically from highest to lowest ATS score.
 
----
-
-## Dashboard Analytics
+### 7- Dashboard Analytics
 
 The system includes:
 - ATS metrics
@@ -149,9 +137,7 @@ The system includes:
 - pie charts
 - candidate comparison dashboard
 
----
-
-## CSV Report Export
+### 8- CSV Report Export
 
 Recruiters can:
 - download ATS reports
@@ -164,7 +150,7 @@ results/ATS_Resume_Report.csv
 
 ---
 
-# 🧠 Why AI Resume Screening?
+## **🧠 Why AI Resume Screening?**
 
 Traditional recruitment processes involve manually reviewing hundreds of resumes.
 
@@ -180,14 +166,12 @@ This AI-based system improves:
 - transparency
 - scalability
 
-by automating candidate analysis using NLP techniques.
-
 ---
 
-# 🏗️ System Architecture
+## **🏗️ System Architecture**
 
 The project follows a layered architecture.
-
+```
 Resume Upload
 ↓
 Text Extraction
@@ -205,10 +189,11 @@ ATS Score Calculation
 Candidate Ranking
 ↓
 Visualization & Reports
+```
 
 ---
 
-# 📁 Project Structure
+## **📁 Project Structure**
 
 ```
 semester_project/
@@ -248,27 +233,27 @@ semester_project/
 ```
 ---
 
-# ⚙️ Technologies Used
+## **⚙️ Technologies Used**
 
-## Frontend
+**Frontend**
 - Streamlit
 
-## Backend
+**Backend**
 - Python
 
-## NLP & AI
+**NLP & AI**
 - NLTK
 - Scikit-learn
 
-## Data Processing
+**Data Processing**
 - Pandas
 
-## Visualization
+**Visualization**
 - Plotly
 
 ---
 
-# 📦 Python Libraries Used
+## **📦 Python Libraries Used**
 
 - streamlit
 - nltk
@@ -280,87 +265,63 @@ semester_project/
 
 ---
 
-# ⚙️ Installation & Setup
+## **⚙️ Installation & Setup**
 
-## 1. Clone Repository
-
-```bash
+### 1. Clone Repository
+```
 git clone https://github.com/EmanFatima-134/AI-Resume-Screening-System.git
 ```
 
----
-
-## 2. Open Project Folder
-
-```bash
+### 2. Open Project Folder**
+```
 cd AI-Resume-Screening-System
 ```
 
----
-
-## 3. Create Virtual Environment
-
-```bash
+### 3. Create Virtual Environment
+```
 python -m venv venv
 ```
 
----
-
-## 4. Activate Virtual Environment
-
-### Windows
-
-```bash
+### 4. Activate Virtual Environment
+```
 venv\Scripts\activate
 ```
 
----
-
-## 5. Install Dependencies
-
-```bash
+### 5. Install Dependencies
+```
 pip install -r requirements.txt
 ```
 
----
-
-## 6. Download NLTK Resources
-
-```bash
+### 6. Download NLTK Resources
+```
 python
 ```
 
 Then run:
-
-```python
+```
 import nltk
 nltk.download('punkt_tab')
 nltk.download('stopwords')
 exit()
 ```
 
----
-
-## 7. Run Project
-
-```bash
+### 7. Run Project
+```
 streamlit run app.py
 ```
 
 ---
 
-# 🌐 Application Workflow
+## **🌐 Application Workflow**
 
-## Step 1 — Enter Job Description
+### Step 1 — Enter Job Description
 
 Recruiter enters:
 - job requirements
 - technical skills
 - preferred qualifications
 
----
-
-## Step 2 — Upload Resume(s)
+### Step 2 — Upload Resume(s)
 
 Upload:
 - PDF
@@ -369,9 +330,7 @@ Upload:
 
 Supports multiple resumes simultaneously.
 
----
-
-## Step 3 — NLP Processing
+### Step 3 — NLP Processing
 
 The system:
 - extracts text
@@ -379,27 +338,21 @@ The system:
 - removes stopwords
 - normalizes tokens
 
----
-
-## Step 4 — ATS Analysis
+### Step 4 — ATS Analysis
 
 The system calculates:
 - similarity score
 - skill match score
 - final ATS score
 
----
-
-## Step 5 — Candidate Ranking
+### Step 5 — Candidate Ranking
 
 Candidates are:
 - compared
 - scored
 - ranked automatically
 
----
-
-## Step 6 — Export Report
+### Step 6 — Export Report
 
 Recruiters can:
 - download CSV reports
@@ -408,7 +361,7 @@ Recruiters can:
 
 ---
 
-# 📊 Dashboard Features
+## **📊 Dashboard Features**
 
 The dashboard includes:
 
@@ -423,7 +376,7 @@ The dashboard includes:
 
 ---
 
-# 📈 ATS Scoring Logic
+## **📈 ATS Scoring Logic**
 
 The final ATS score combines:
 
@@ -438,44 +391,45 @@ This improves scoring reliability by considering:
 
 ---
 
-# 📸 Project Screenshots
+## **📸 Project Screenshots**
 
-## Home Page
+**Home Page**
 - Resume upload
 - Job description input
 - Sidebar features
 
-## ATS Dashboard
+**ATS Dashboard**
 - ATS score
 - Recommendation
 - Metrics
 
-## Ranking Table
+**Ranking Table**
 - Candidate comparison
 - ATS ranking
 
-## Charts
+**Charts**
 - Bar graph
 - Pie chart
 
-## CSV Report Download
+**CSV Report Download**
 - Recruiter report export
 
 ---
 
-# 🧪 Sample Test Scenario
+## **🧪 Sample Test Scenario**
 
-## Job Role
+### Job Role
+
 Unity Game Developer
 
-## Required Skills
+### Required Skills
 - Unity
 - Python
 - Git
 - Blender
 - C#
 
-## Results
+### Results
 
 The system:
 - analyzes resumes
@@ -485,7 +439,7 @@ The system:
 
 ---
 
-# ⚠️ Current Limitations
+## **⚠️ Current Limitations**
 
 Current limitations include:
 
@@ -499,7 +453,7 @@ These limitations were acceptable within the semester project scope.
 
 ---
 
-# 🚀 Future Improvements
+## **🚀 Future Improvements**
 
 Future enhancements may include:
 
@@ -514,7 +468,7 @@ Future enhancements may include:
 
 ---
 
-# Project Compliance
+## **Project Compliance**
 
 This project satisfies:
 - SRS requirements
@@ -531,7 +485,7 @@ The project demonstrates:
 
 ---
 
-# 🎯 Learning Outcomes
+## **🎯 Learning Outcomes**
 
 This project helped us understand:
 - Software Engineering workflow
@@ -548,7 +502,7 @@ This project helped us understand:
 
 ---
 
-# 📌 Final Notes
+## **📝 Final Notes**
 
 The AI Resume Screening & Job Matching System successfully combines:
 - AI
@@ -569,17 +523,8 @@ The project demonstrates practical implementation of:
 using modern Python technologies.
 
 ---
+## **👤 Contact**
 
-# 👤 Authors
-
-Software Engineering Semester Project
-
-## Group Members
-- Eman Fatima (emanfatima5978@gmail.com)
-- Naimal Munir (nemalmunir@gmail.com)
-
----
-
-# ⭐ Thank You
-
-Thank you for reviewing our project! 🚀
+If you have any questions or would like to discuss the project:
+- Naimal Munir - nemalmunir@gmail.com
+- Eman Fatima - emanfatima5978@gmail.com
