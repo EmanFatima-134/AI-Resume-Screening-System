@@ -125,7 +125,7 @@ The system supports:
 - multiple resume uploads
 - automatic candidate comparison
 - ATS-based ranking
-- 
+  
 Candidates are sorted automatically from highest to lowest ATS score.
 
 ### 7- Dashboard Analytics
